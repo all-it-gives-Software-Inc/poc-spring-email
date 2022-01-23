@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo 'Building...'
                 sh 'mvn clean compile'
-                def pom = readMavenPom file:'pom.xml'
+                pom = readMavenPom file: 'pom.xml'
                 print pom.version
                 env.version = pom.version
                 }
