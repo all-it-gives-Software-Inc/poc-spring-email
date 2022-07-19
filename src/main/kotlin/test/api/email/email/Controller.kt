@@ -16,6 +16,7 @@ class Controller(
 ) {
 
 
+    @CrossOrigin(origins = ["*"])
     @PostMapping("/email-send")
     fun sendMail(
             @RequestParam(value = "email", required = true) destinatario: String,
