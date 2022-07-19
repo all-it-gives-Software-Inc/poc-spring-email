@@ -2,11 +2,9 @@ package test.api.email.email
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
-import org.springframework.mail.SimpleMailMessage
-import org.springframework.mail.javamail.JavaMailSender
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import test.api.email.email.Response.SendEmailResponse
+import test.api.email.email.services.EmailService
 
 @RestController
 /**
@@ -14,23 +12,15 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RequestMapping("/api", produces = [MediaType.APPLICATION_JSON_VALUE])
 class Controller(
-    @Autowired private val mailSender: JavaMailSender,
+        @Autowired private val emailService: EmailService,
 ) {
 
 
-    @GetMapping("/email-send")
-    fun sendMail(): String {
-        val message = SimpleMailMessage()
-        message.setText("Hello from Spring Boot Application")
-        message.setTo("joao4018@gmail.com")
-        message.setFrom("joaodev4018@gmail.com")
-        return try {
-            mailSender.send(message)
-            "Email enviado com sucesso!"
-        } catch (e: Exception) {
-            e.printStackTrace()
-            "Erro ao enviar email."
-        }
+    @PostMapping("/email-send")
+    fun sendMail(
+            @RequestParam(value = "destinatário", required = true) destinatario: String,
+    ): SendEmailResponse {
+        return emailService.sendRecoveryPasswordEmail(destinatario)
     }
 }
 
