@@ -208,7 +208,7 @@
 						<plugin>spring</plugin>
 						<plugin>jpa</plugin>
 					</compilerPlugins>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>11</jvmTarget>
                 </configuration>
 				<dependencies>
 					<!--Como todas as classes JPA devem ser open, esse plugin faz isso automaticamente quando elas são transpiladas para java-->
