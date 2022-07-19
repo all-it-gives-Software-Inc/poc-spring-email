@@ -18,7 +18,7 @@ class Controller(
 
     @PostMapping("/email-send")
     fun sendMail(
-            @RequestParam(value = "destinatário", required = true) destinatario: String,
+            @RequestParam(value = "email", required = true) destinatario: String,
     ): SendEmailResponse {
         return emailService.sendRecoveryPasswordEmail(destinatario)
     }
