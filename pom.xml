@@ -29,7 +29,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<kotlin.version>1.6.10</kotlin.version>
-		<postgreSQL.version>42.2.8</postgreSQL.version>
+		<postgreSQL.version>42.3.3</postgreSQL.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 		<springdoc-openapi-data-rest.version>1.5.10</springdoc-openapi-data-rest.version>
 	</properties>
