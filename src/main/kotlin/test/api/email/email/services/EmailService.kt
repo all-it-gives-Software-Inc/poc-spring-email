@@ -76,7 +76,7 @@ class EmailService(
         message.setText(description)
         message.setSubject("NoReply")
         message.setTo(destinatario)
-        message.setFrom(email)
+        message.setFrom("mafieu666@hotmail.com")
         return message
     }
 }
