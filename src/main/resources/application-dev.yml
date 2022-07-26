@@ -18,7 +18,7 @@ spring:
     name: email
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-18-235-235-165.compute-1.amazonaws.com:5432/d6buh0t4uhcjqk
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: postgres
 
