@@ -21,7 +21,7 @@ class AccessUser {
     val personalData: PersonalData? = null
 
     @Column(unique = true)
-    val userName: @NotEmpty(message = "The user name cannot be empty") @NotNull String? = null
+    val username: @NotEmpty(message = "The user name cannot be empty") @NotNull String? = null
 
     @Column(unique = true)
     val email: @NotEmpty(message = "The user email cannot be empty") @NotNull String? = null

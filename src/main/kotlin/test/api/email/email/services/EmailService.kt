@@ -12,6 +12,7 @@ import test.api.email.email.entity.AppCodigoAcesso
 import test.api.email.email.form.TokenForm
 import test.api.email.email.repository.AccessUserRepository
 import test.api.email.email.repository.AppCodigoAcessoRepository
+import test.api.email.email.rest.AuthRest
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.random.Random
@@ -19,6 +20,7 @@ import kotlin.random.Random
 class EmailService(
         @Autowired private val mailSender: JavaMailSender,
         @Autowired private val accessUserRepository: AccessUserRepository,
+        @Autowired private val authRest: AuthRest,
         @Autowired
         private val  appCodigoAcessoRepository: AppCodigoAcessoRepository,
 ) {
@@ -29,7 +31,7 @@ class EmailService(
     fun sendRecoveryPasswordEmail(destinatario: String): SendEmailResponse {
 
         val randomString = createRandomCode()
-        accessUserRepository.findAppUsuarioByEmail(destinatario).orElseThrow { ServiceException("Usuário $destinatario não encontrado! Contatar Suporte para mais informações") }
+        authRest.getUserByEmail(destinatario).orElseThrow { ServiceException("Usuário $destinatario não encontrado! Contatar Suporte para mais informações") }
         val message = provideEmail(destinatario,"Seu código para recuperação de senha: $randomString")
         val now = LocalDateTime.now()
 
