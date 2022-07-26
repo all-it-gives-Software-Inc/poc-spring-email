@@ -7,22 +7,16 @@ import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
 import test.api.email.email.Exception.ServiceException
 import test.api.email.email.Response.SendEmailResponse
-import test.api.email.email.dto.TokenDTO
-import test.api.email.email.entity.AppCodigoAcesso
-import test.api.email.email.form.TokenForm
 import test.api.email.email.repository.AccessUserRepository
 import test.api.email.email.repository.AppCodigoAcessoRepository
 import test.api.email.email.rest.AuthRest
-import java.time.LocalDateTime
-import java.util.*
+import test.api.email.email.rest.requests.AccessCodePostRequestBody
+import test.api.email.email.rest.response.ResponseBodyGenerateAccessCode
 import kotlin.random.Random
 @Service
 class EmailService(
         @Autowired private val mailSender: JavaMailSender,
-        @Autowired private val accessUserRepository: AccessUserRepository,
-        @Autowired private val authRest: AuthRest,
-        @Autowired
-        private val  appCodigoAcessoRepository: AppCodigoAcessoRepository,
+        @Autowired private val authRest: AuthRest
 ) {
 
     @Value("\${spring.mail.username}")
@@ -30,12 +24,12 @@ class EmailService(
 
     fun sendRecoveryPasswordEmail(destinatario: String): SendEmailResponse {
 
-        val randomString = createRandomCode()
         authRest.getUserByEmail(destinatario).orElseThrow { ServiceException("Usuário $destinatario não encontrado! Contatar Suporte para mais informações") }
-        val message = provideEmail(destinatario,"Seu código para recuperação de senha: $randomString")
-        val now = LocalDateTime.now()
+        val accessCodePostRequestBody = AccessCodePostRequestBody()
+        accessCodePostRequestBody.email = destinatario
+        val codigoAcesso : ResponseBodyGenerateAccessCode = authRest.generateAccessCode(accessCodePostRequestBody).orElseThrow { ServiceException("Usuário $destinatario não encontrado! Contatar Suporte para mais informações") }
+        val message = provideEmail(destinatario,"Seu código para recuperação de senha: ${codigoAcesso.code}")
 
-        appCodigoAcessoRepository.save(AppCodigoAcesso(randomString, now.plusMinutes(5L), now, destinatario))
         return try {
             mailSender.send(message)
             SendEmailResponse("Email enviado com sucesso!")

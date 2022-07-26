@@ -2,8 +2,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL}
-    password: ${PASS}
+    username: joaodev4018@gmail.com
+    password: ohkrboylhglspnan
     properties:
       mail:
         smtp:
@@ -38,7 +38,7 @@ server:
 eureka:
   instance:
     hostname: localhost
-]  client:
+  client:
     service-url:
       defaultZone: http://localhost:8080/eureka
     fetch-registry: true
@@ -64,3 +64,11 @@ info:
 ribbon:
   ReadTimeout: 2147483647
   ConnectTimeout: 2147483647
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
