@@ -37,8 +37,8 @@ server:
 
 eureka:
   instance:
-    hostname: localhost
-    prefer-ip-address: true
+    non-secure-port: 80
+    hostname: api-email-jj.herokuapp.com
   client:
     service-url:
       defaultZone: https://secret-anchorage-03030.herokuapp.com/eureka/
