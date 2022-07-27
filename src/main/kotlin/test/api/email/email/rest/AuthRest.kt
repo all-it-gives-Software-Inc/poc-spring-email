@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import test.api.email.email.entity.AccessUser
 import java.util.*
 
-@FeignClient(name = "gateway")
+@FeignClient(name = "GATEWAY", url = "https://GATEWAY")
 interface AuthRest {
 
     @RequestMapping("auth/user?email={email}")
