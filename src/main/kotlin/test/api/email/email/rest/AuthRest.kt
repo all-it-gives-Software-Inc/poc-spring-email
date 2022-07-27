@@ -1,4 +1,3 @@
-7
 package test.api.email.email.rest
 
 import org.springframework.cloud.openfeign.FeignClient
