@@ -1,3 +1,4 @@
+7
 package test.api.email.email.rest
 
 import org.springframework.cloud.openfeign.FeignClient
@@ -9,6 +10,6 @@ import java.util.*
 @FeignClient(name = "GATEWAY")
 interface AuthRest {
 
-    @RequestMapping("user?email={email}")
+    @RequestMapping("auth/user?email={email}")
     fun getUserByEmail(@PathVariable("email") email: String): Optional<AccessUser>
 }
