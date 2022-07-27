@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import test.api.email.email.entity.AccessUser
 import java.util.*
 
-@FeignClient(name = "AUTH", url = "https://fast-lake-01538.herokuapp.com/auth/")
+@FeignClient(name = "GATEWAY")
 interface AuthRest {
 
     @RequestMapping("user?email={email}")
