@@ -45,3 +45,11 @@ info:
 ribbon:
   ReadTimeout: 2147483647
   ConnectTimeout: 2147483647
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2147483647
+        readTimeout: 2147483647
+#        loggerLevel: basic

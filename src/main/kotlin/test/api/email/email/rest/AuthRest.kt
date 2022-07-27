@@ -8,10 +8,10 @@ import test.api.email.email.rest.requests.AccessCodePostRequestBody
 import test.api.email.email.rest.response.ResponseBodyGenerateAccessCode
 import java.util.*
 
-@FeignClient(name = "AUTH")
+@FeignClient("AUTH")
 interface AuthRest {
 
-    @RequestMapping("user?email={email}")
+    @RequestMapping("/user?email={email}")
     fun getUserByEmail(@PathVariable("email") email: String): Optional<ResponseBodyGenerateAccessCode>
 
     @RequestMapping("generateAccessCode")
