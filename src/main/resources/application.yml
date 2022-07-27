@@ -2,8 +2,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL}
-    password: ${PASS}
+    username: joaodev4018@gmail.com
+    password: ohkrboylhglspnan
     properties:
       mail:
         smtp:
@@ -16,21 +16,7 @@ spring:
     test-connection: true
   application:
     name: email
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-18-235-235-165.compute-1.amazonaws.com:5432/d6buh0t4uhcjqk
-    username: ${DBUSER}
-    password: ${DBPASS}
 
-  # JPA properties
-  jpa:
-    hibernate:
-      ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
-    show-sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    open-in-view: false
-    generate-ddl: true
 
 server:
   port: 8081
@@ -38,18 +24,12 @@ server:
 eureka:
   instance:
     non-secure-port: 80
-    hostname: api-email-jj.herokuapp.com
+    hostname: localhost
   client:
     service-url:
       defaultZone: https://secret-anchorage-03030.herokuapp.com/eureka/
     fetch-registry: true
     register-with-eureka: true
-
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
 
 management:
   endpoints:
