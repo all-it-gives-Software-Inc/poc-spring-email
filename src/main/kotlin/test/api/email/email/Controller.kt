@@ -23,5 +23,13 @@ class Controller(
     ): SendEmailResponse {
         return emailService.sendRecoveryPasswordEmail(destinatario)
     }
+
+    @CrossOrigin(origins = ["*"])
+    @PostMapping("/email-send")
+    fun sendValidateAccountMail(
+            @RequestParam(value = "email", required = true) destinatario: String,
+    ): SendEmailResponse {
+        return emailService.sendValidateAccountEmail(destinatario)
+    }
 }
 
