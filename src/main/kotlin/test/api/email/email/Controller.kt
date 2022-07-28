@@ -25,7 +25,7 @@ class Controller(
     }
 
     @CrossOrigin(origins = ["*"])
-    @PostMapping("/email-send")
+    @PostMapping("/email-validate-send")
     fun sendValidateAccountMail(
             @RequestParam(value = "email", required = true) destinatario: String,
     ): SendEmailResponse {
