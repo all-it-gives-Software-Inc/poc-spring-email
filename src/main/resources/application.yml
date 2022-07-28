@@ -2,8 +2,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: joaodev4018@gmail.com
-    password: ohkrboylhglspnan
+    username: ${EMAIL}
+    password: ${PASS}
     properties:
       mail:
         smtp:
@@ -24,7 +24,7 @@ server:
 eureka:
   instance:
     non-secure-port: 80
-    hostname: localhost
+    hostname: api-email-jj.herokuapp.com
   client:
     service-url:
       defaultZone: https://secret-anchorage-03030.herokuapp.com/eureka/
