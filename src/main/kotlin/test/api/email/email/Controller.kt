@@ -3,6 +3,7 @@ package test.api.email.email
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
+import test.api.email.email.Response.SendEmailRequest
 import test.api.email.email.Response.SendEmailResponse
 import test.api.email.email.services.EmailService
 
@@ -27,9 +28,9 @@ class Controller(
     @CrossOrigin(origins = ["*"])
     @PostMapping("/email-validate-send")
     fun sendValidateAccountMail(
-            @RequestParam(value = "email", required = true) destinatario: String,
+            @RequestBody(required = true) destinatario: SendEmailRequest,
     ): SendEmailResponse {
-        return emailService.sendValidateAccountEmail(destinatario)
+        return emailService.sendValidateAccountEmail(destinatario.email)
     }
 }
 
