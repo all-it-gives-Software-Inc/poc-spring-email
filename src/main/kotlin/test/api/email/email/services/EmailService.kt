@@ -37,6 +37,18 @@ class EmailService(
         }
     }
 
+    fun sendValidateAccountEmail(destinatario: String): SendEmailResponse {
+        return try {
+            val message = provideEmail(destinatario,"Acesse o link para finalizar a criação da sua conta: " +
+                    "https://personal-project-jj.herokuapp.com/email-validate?email="+destinatario)
+            mailSender.send(message)
+            SendEmailResponse("Email enviado com sucesso!")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            SendEmailResponse("Erro ao enviar email.")
+        }
+    }
+
     private fun provideEmail(destinatario: String, description: String): SimpleMailMessage {
         val message = SimpleMailMessage()
         message.setText(description)
