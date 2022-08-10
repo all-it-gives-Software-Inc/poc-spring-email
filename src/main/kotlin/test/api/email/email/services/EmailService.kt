@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
 import test.api.email.email.Exception.ServiceException
 import test.api.email.email.Response.SendEmailResponse
+import test.api.email.email.config.KafkaConfig
 import test.api.email.email.rest.AuthRest
 import test.api.email.email.rest.requests.AccessCodePostRequestBody
 import test.api.email.email.rest.response.ResponseBodyGenerateAccessCode
@@ -39,7 +40,7 @@ class EmailService(
 
     fun sendValidateAccountEmail(destinatario: String): SendEmailResponse {
         return try {
-            authRest.getUserByEmail(destinatario).orElseThrow { ServiceException("Usuário $destinatario não encontrado! Contatar Suporte para mais informações") }
+//            authRest.getUserByEmail(destinatario).orElseThrow { ServiceException("Usuário $destinatario não encontrado! Contatar Suporte para mais informações") }
             val message = provideEmail(destinatario,"Acesse o link para finalizar a criação da sua conta: " +
                     "https://personal-project-jj.herokuapp.com/email-validate?email="+destinatario)
             mailSender.send(message)
