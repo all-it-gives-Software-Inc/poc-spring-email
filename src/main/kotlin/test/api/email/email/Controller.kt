@@ -33,11 +33,11 @@ class Controller(
         return emailService.sendValidateAccountEmail(destinatario.email)
     }
 
-    @PostMapping("/test-kafka")
-    fun sendValidateAccountMailKafka(
-    ) {
-        val kafkaConfig = KafkaConfig(emailService)
-        kafkaConfig.consume()
-    }
+//    @PostMapping("/test-kafka")
+//    fun sendValidateAccountMailKafka(
+//    ) {
+//        val kafkaConfig = KafkaConfig(emailService)
+//        kafkaConfig.consume()
+//    }
 }
 

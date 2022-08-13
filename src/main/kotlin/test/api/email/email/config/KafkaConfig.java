@@ -9,24 +9,28 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
 import test.api.email.email.services.EmailService;
 
 import java.util.Arrays;
 import java.util.Properties;
 
-@Configuration
+@Component
 public class KafkaConfig {
     private final String topic;
     private final Properties props;
     EmailService emailService;
 
-    public KafkaConfig(EmailService emailService2) {
+    public KafkaConfig(EmailService emailService2, @Value("${spring.kfuser}") String username,
+                       @Value("${spring.kfpass}") String password) {
         emailService = emailService2;
         String brokers = "moped-01.srvs.cloudkafka.com:9094,moped-02.srvs.cloudkafka.com:9094,"
                  + "moped-03.srvs.cloudkafka.com:9094";
-        String username = "d83eral9";
-        String password = "mfb3msC-g1i3z89JrpzCzjJ4whd6J7bx";
+
+
         this.topic = username + "-default";
 
         String jaasTemplate = "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"%s\" password=\"%s\";";
@@ -50,6 +54,7 @@ public class KafkaConfig {
         props.put("sasl.jaas.config", jaasCfg);
     }
 
+
     public void consume() {
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList(topic));
@@ -59,6 +64,20 @@ public class KafkaConfig {
                 emailService.sendValidateAccountEmail(record.key());
             }
         }
+    }
+    private Runnable t1 = () -> {
+        try{
+            Thread.sleep(100);
+            consume();//
+        } catch (Exception e){}
+
+    };
+
+
+    @Bean
+    @DependsOn("emailService")
+    public void threadKafka(){
+        new Thread(t1).start();
     }
 
     public void produce(String email, String conteudo) {
