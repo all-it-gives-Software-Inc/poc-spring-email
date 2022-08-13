@@ -17,6 +17,7 @@ class KafkaConfig(
     var emailService: EmailService, @Value("\${spring.kfuser}") username: String,
     @Value("\${spring.kfpass}") password: String?
 ) {
+
     private val topic: String
     private val props: Properties
     fun consume() {
