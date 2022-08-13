@@ -5,7 +5,6 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import test.api.email.email.Response.SendEmailRequest
 import test.api.email.email.Response.SendEmailResponse
-import test.api.email.email.config.KafkaConfig
 import test.api.email.email.services.EmailService
 
 @RestController

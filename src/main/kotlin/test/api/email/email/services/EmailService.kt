@@ -2,17 +2,14 @@ package test.api.email.email.services
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
 import test.api.email.email.Exception.ServiceException
 import test.api.email.email.Response.SendEmailResponse
-import test.api.email.email.config.KafkaConfig
 import test.api.email.email.rest.AuthRest
 import test.api.email.email.rest.requests.AccessCodePostRequestBody
 import test.api.email.email.rest.response.ResponseBodyGenerateAccessCode
-import java.io.FileReader
 
 
 @Service
