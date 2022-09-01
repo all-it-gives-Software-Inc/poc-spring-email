@@ -29,7 +29,7 @@ class Controller(
     fun sendValidateAccountMail(
             @RequestBody(required = true) destinatario: SendEmailRequest,
     ): SendEmailResponse {
-        return emailService.sendValidateAccountEmail(destinatario.email)
+        return emailService.sendValidateAccountEmail(destinatario.email , destinatario.conteudo)
     }
 
 //    @PostMapping("/test-kafka")

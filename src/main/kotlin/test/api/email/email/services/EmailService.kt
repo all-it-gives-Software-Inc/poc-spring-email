@@ -38,11 +38,10 @@ class EmailService(
         }
     }
 
-    fun sendValidateAccountEmail(destinatario: String): SendEmailResponse {
+    fun sendValidateAccountEmail(destinatario: String, conteudo: String): SendEmailResponse {
         return try {
 //            authRest.getUserByEmail(destinatario).orElseThrow { ServiceException("Usuário $destinatario não encontrado! Contatar Suporte para mais informações") }
-            val message = provideEmail(destinatario,"Acesse o link para finalizar a criação da sua conta: " +
-                    "https://personal-project-jj.herokuapp.com/email-validate?email="+destinatario)
+            val message = provideEmail(destinatario,conteudo)
             mailSender.send(message)
             SendEmailResponse("Email enviado com sucesso!")
         } catch (e: Exception) {
