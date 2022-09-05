@@ -6,6 +6,7 @@ import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.common.serialization.StringSerializer
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.DependsOn
@@ -20,14 +21,14 @@ class KafkaConfig(
 
     private val topic: String
     private val props: Properties
+    private val logger = LoggerFactory.getLogger(javaClass)
     fun consume() {
         val consumer = KafkaConsumer<String, String>(props)
         consumer.subscribe(Arrays.asList(topic))
         while (true) {
             val records = consumer.poll(1000)
             for (record in records) {
-
-                println("Message: $record.value() , key $record.key()")
+                logger.info("Message: $record.value() , key $record.key()")
                 emailService.sendValidateAccountEmail(record.key(), record.value())
             }
         }
