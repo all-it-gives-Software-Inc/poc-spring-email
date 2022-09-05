@@ -26,6 +26,8 @@ class KafkaConfig(
         while (true) {
             val records = consumer.poll(1000)
             for (record in records) {
+
+                println("Message: $record.value() , key $record.key()")
                 emailService.sendValidateAccountEmail(record.key(), record.value())
             }
         }
